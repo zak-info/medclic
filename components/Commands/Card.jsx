@@ -18,14 +18,12 @@ const Card = ({ data }) => {
 
     return (
         <div className=' relative w-5/6 border rounded-lg px-4 mt-6 py-3'>
-            {/* <Image src={data?.imageUrl} width={100} height={100} className=' absolute top-0 right-0 m-4 w-32 h-32' /> */}
             <ShowCommands data={data} />
             <div className='w-full flex justify-between '>
                 <div className='flex flex-col'>
                     <span className='text-sm'>Mr/Mme. {data?.user?.fullname}</span>
                     <span className='text-xs text-gray-400'>{ new Date(data?.createdAt).toLocaleDateString()}</span>
                 </div>
-                {/* <div class="w-10 h-10 bg-[#329cde]  border border-white rounded-full flex justify-center items-center text-white" alt="">{getFirstLetters(data?.fullname)}</div> */}
             </div>
             <div className='w-full flex flex-col gap-2  mt-6'>
                 <div className='flex items-center '>
