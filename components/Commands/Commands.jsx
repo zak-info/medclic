@@ -20,9 +20,7 @@ const Commands = ({ commands }) => {
                     <Card key={index} data={ph} />
                 ))
             }
-            {/* <Card data={{_id:"123123",date:"12-12-12",imageUrl:'/images/dwa.svg' , client:{fullname:"name 1",phone:'1234124',address:"alger"}}} /> */}
-            {/* <Card data={{img:"p2.svg",name:"Dr. Marcus Horizon",job:"Psikeater"}} /> */}
-
+           
         </div>
     )
 }
