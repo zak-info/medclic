@@ -31,7 +31,7 @@ const Welcome = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
                     // transition={{ duration: 1 }}
-                    src="/logo.png" className='w-60 h-60' />
+                    src="/logo5.png" className='w-60 h-60' />
         </div>
     )
 }

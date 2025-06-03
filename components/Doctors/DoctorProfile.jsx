@@ -8,8 +8,10 @@ import Apointment from './Apointment'
 import Payment from './Payment'
 import Chat from './Chat'
 
-const DoctorProfile = ({ user, products }) => {
+const DoctorProfile = ({ user:gUser, products }) => {
     const [section, setSection] = useState("profile")
+    const [user, setUser] = useState(gUser)
+
 
 
     return (
@@ -18,7 +20,7 @@ const DoctorProfile = ({ user, products }) => {
             <ProfileCard user={user} />
             {
                 section == "profile" ?
-                    <Apointment products={products} user={user} setSection={setSection} />
+                    <Apointment setUser={setUser} products={products} user={user} setSection={setSection} />
                     : section == "payment" ?
                         <Payment />
                         :

@@ -42,7 +42,7 @@ const Card = ({ data }) => {
             </div>
             <div className='w-full flex justify-end mt-4'>
                 {/* <button className='w-2/5 py-2 bg-secondry-1 rounded-lg'>Cancel</button> */}
-                <button className='w-2/5 text-center py-2 bg-primary-1 text-white rounded-lg'>Discover</button>
+                <button className='w-2/5 text-center py-2 bg-primary-1 text-white rounded-lg'>Découvrir</button>
             </div>
 
 

@@ -56,8 +56,8 @@ const CreateFreeCom = ({ user }) => {
 
     return (
         <div className='w-full flex justify-end'>
-            <Button color='primary' onPress={() => handleOpen()} variant='solid' size='lg' startContent={<i class="ri-add-line text-2xl"></i>}>
-                free order
+            <Button color='primary' className='text-white' onPress={() => handleOpen()} variant='solid' size='lg' startContent={<i class="ri-add-line text-2xl"></i>}>
+            Commande gratuite
             </Button>
             <Modal backdrop={"blur"} isOpen={isOpen} onClose={onClose} className='fixed inset-0 pb-[env(safe-area-inset-bottom)]'>
                 <ModalContent>

@@ -1,6 +1,7 @@
 "use server"
 
 import { createMongoUser, getMongoUser, getMongoUsers, updateMongoUserDataKey, updateMongoUsers } from "@/controlers/user.controler";
+import Command from "@/models/command.model";
 import { connect } from "@/models/mongodb";
 import User from "@/models/user.model";
 import { revalidatePath } from "next/cache";
@@ -21,9 +22,27 @@ export async function createUser(data) {
 }
 export async function UpdateUserDataKey(_id, data, path) {
     try {
-        const result = await updateMongoUserDataKey({ _id }, data)
+        const result = await User.updateOne({ _id }, data)
         if (result?.success) {
             revalidatePath("/dashboard/profile", "page")
+            if (path) {
+                revalidatePath(path, "page")
+            }
+            return { success: true, status: 200 };
+        } else {
+            return { success: false, status: 404 };
+        }
+    } catch (error) {
+        console.log(error);
+        return { success: false, status: 404, error }
+    }
+}
+
+export async function UpdateCommandDataKey(_id, data, path) {
+    try {
+        const result = await Command.updateOne({ _id }, data)
+        if (result?.success) {
+            revalidatePath("/dashboard/commands", "page")
             if (path) {
                 revalidatePath(path, "page")
             }

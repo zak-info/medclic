@@ -25,7 +25,7 @@ const CreateExchange = ({ user, idPharmacy, myProducts, hisProducts }) => {
         setPostloader(true);
 
         try {
-            const result = await addExchange({toOffer:mProducts,toGet:hProducts,idPharmacy,idUser:user?._id,description:credentials?.description,status:'pending'});
+            const result = await addExchange({ toOffer: mProducts, toGet: hProducts, idPharmacy, idUser: user?._id, description: credentials?.description, status: 'pending' });
             if (result.success) {
                 // onClose();
                 setEvent(true)
@@ -41,8 +41,8 @@ const CreateExchange = ({ user, idPharmacy, myProducts, hisProducts }) => {
 
     return (
         <div className='w-full flex justify-end'>
-            <Button color='primary' onPress={() => handleOpen()} variant='solid' size='lg' startContent={<i class="ri-add-line text-2xl"></i>}>
-                exchange
+            <Button color='primary' onPress={() => handleOpen()} className='text-white' variant='solid' size='lg' startContent={<i class="ri-add-line text-2xl"></i>}>
+                echange
             </Button>
             <Modal backdrop={"blur"} isOpen={isOpen} onClose={onClose} className='fixed inset-0 pb-[env(safe-area-inset-bottom)]'>
                 <ModalContent>
@@ -60,6 +60,11 @@ const CreateExchange = ({ user, idPharmacy, myProducts, hisProducts }) => {
                                             </div>
                                             :
                                             <>
+                                                <div className=" w-full  flex justify-center">
+                                                    <div className=' w-20 h-20 rounded-full bg-blue-300 flex justify-center items-center'>
+                                                        <i class="ri-camera-ai-line text-3xl "></i>
+                                                    </div>
+                                                </div>
                                                 <h1 className=' font-bold'>To Offer</h1>
                                                 <select name="toOffer" className='w-full h-10 mt-4 py-2' onChange={(e) => { setMProducts(prev => [...prev, e.target.value]) }} id="">
                                                     <option value={""}>select product</option>

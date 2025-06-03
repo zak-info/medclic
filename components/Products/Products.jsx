@@ -19,8 +19,8 @@ const Products = ({ user, products: mProducts }) => {
     return (
         <div className='w-screen min-h-screen pt-8 flex flex-col items-center'>
             <div className='w-4/5 flex justify-between mt-4'>
-                <span className='text-sm font-bold'>Popular product</span>
-                <span className='text-xs text-primary-1'>see all</span>
+                <span className='text-sm font-bold'>produits</span>
+                <span className='text-xs text-primary-1'>voir tout</span>
             </div>
             <div className='w-[342px] md:w-[532px] h-[61px] mt-4  px-4 flex justify-start items-center gap-2 border border-[#E2E8F0] bg-gray-100 rounded-full'>
                 <i className="ri-search-line text-xl"></i>

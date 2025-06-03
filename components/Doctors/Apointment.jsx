@@ -4,8 +4,9 @@ import CreateMed from './CreateMed'
 import DwaCard from './DwaCard'
 import GetMap from './GetMap'
 import { Tab, Tabs } from '@nextui-org/react'
+import AutoActivate from './AutoActivate'
 
-const Apointment = ({ user, products, setSection }) => {
+const Apointment = ({ user,setUser, products, setSection }) => {
     const [days, setDays] = useState([
         { month: "Mon", day: "23", status: false },
         { month: "Tue", day: "24", status: false },
@@ -36,6 +37,7 @@ const Apointment = ({ user, products, setSection }) => {
         <>
             <div className='w-full ms-8 mt-6 font-bold'>About</div>
             <p className='ms-4 me-4 text-xs text-gray-500'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa odit numquam modi sint, praesentium nobis vero repellendus aspernatur soluta qui mollitia, pariatur in incidunt, nam nesciunt nulla doloremque et delectus.</p>
+            <AutoActivate setUser={setUser} user={user} status={user?.data?.delivary == "true" ? "false" : "true"} />
             <div className='w-11/12 border-t border-gray-200  m-6 '></div>
             <div className='w-full flex justify-end px-4'>
                 <CreateMed user={user} />

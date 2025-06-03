@@ -1,4 +1,3 @@
-
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import Commands from '@/components/Commands/Commands'
 import Command from '@/models/command.model'

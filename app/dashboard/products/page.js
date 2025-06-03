@@ -9,7 +9,7 @@ import React from 'react'
 const page =async () => {
   const session = await getServerSession(authOptions);
   await connect()
-  const products = await Product.find({})
+  const products = await Product.find({}).populate('idPharmacy').lean()
   return (
     <Products user={session?.user} products={products} />
   )

@@ -12,9 +12,9 @@ const FreeCom = ({currentUser , commands }) => {
             </div>
 
             <div className='w-5/6 bg-secondry-1 rounded-lg flex mt-6'>
-                <button className='w-1/3 text-sm  rounded-lg py-3 bg-primary-1 text-white'>All</button>
-                <button className='w-1/3 text-sm  rounded-lg py-3 '>Pending</button>
-                <button className='w-1/3 text-sm  rounded-lg py-3 '>Canceled</button>
+                <button className='w-1/3 text-sm  rounded-lg py-3 bg-primary-1 text-white'>Tout</button>
+                <button className='w-1/3 text-sm  rounded-lg py-3 '>En attente</button>
+                <button className='w-1/3 text-sm  rounded-lg py-3 '>Annulé</button>
             </div>
             <div className='w-full flex justify-end mt-4 px-8'>
                 <CreateFreeCom  user={currentUser} />

@@ -40,8 +40,8 @@ const CancleCommand = ({ idCommand,idPharmacy }) => {
 
 
     return (
-        <div className='w-full flex justify-end'>
-            <button onClick={() => handleOpen()} className='w-2/5 text-center py-2 bg-primary-1 text-white rounded-lg'>Refuse</button>
+        <div className=''>
+            <button onClick={() => handleOpen()} className=' px-4 text-center py-2 bg-red-500 text-white rounded-lg'>Refuse</button>
             <Modal backdrop={"blur"} isOpen={isOpen} onClose={onClose} className='fixed inset-0 pb-[env(safe-area-inset-bottom)]'>
                 <ModalContent>
                     {(onClose) => (

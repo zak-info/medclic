@@ -26,7 +26,7 @@ const layout = ({ children }) => {
             <div className='w-full md:w-3/4 md:h-full overflow-y-scroll hide-scrollbar'>
                 {children}
             </div>
-            <div className=' absolute h-16 bg-white !shadow-[0_0.25rem_1.75rem_rgba(30,34,40,0.07)] bottom-0 w-full md:w-1/4 md:h-screen flex md:flex-col md:items-start md:ps-4 md:gap-3 md:justify-start  justify-evenly items-center'>
+            {/* <div className=' absolute h-16 bg-white !shadow-[0_0.25rem_1.75rem_rgba(30,34,40,0.07)] bottom-0 w-full md:w-1/4 md:h-screen flex md:flex-col md:items-start md:ps-4 md:gap-3 md:justify-start  justify-evenly items-center'>
                 <motion.img
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -48,7 +48,6 @@ const layout = ({ children }) => {
                 {user?.type == "user" ?
                     <>
                         <Link href={"/dashboard/orders"} className={`flex items-end ${last_path == "orders" ? "text-primary-1" : "text-gray-300"}`}>
-                            {/* <i className={`ri-mail-line text-2xl `}></i> */}
                             <i class="ri-inbox-2-line text-2xl"></i>
                             <span className='hidden md:block ms-2 font-bold'>orders</span>
                         </Link>
@@ -74,7 +73,7 @@ const layout = ({ children }) => {
                     :
                     null
                 }
-            </div>
+            </div> */}
 
 
         </div>

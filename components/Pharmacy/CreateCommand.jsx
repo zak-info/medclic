@@ -2,12 +2,12 @@
 
 import { CreateCom } from '@/actions/command.action';
 import { CreateMedic, createProduct } from '@/actions/product.action';
-import { Button, Input, Modal, ModalBody, ModalContent, ModalHeader, Textarea, useDisclosure } from '@nextui-org/react';
+import { Button, Chip, Input, Modal, ModalBody, ModalContent, ModalHeader, Textarea, useDisclosure } from '@nextui-org/react';
 import React, { useState } from 'react'
 import Lottie from "lottie-react";
 import check from "@/public/check.json";
 
-const CreateCommand = ({ user, idPharmacy }) => {
+const CreateCommand = ({ user, idPharmacy,pharmacy }) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
     const handleOpen = () => {
@@ -56,15 +56,20 @@ const CreateCommand = ({ user, idPharmacy }) => {
 
     return (
         <div className='w-full flex justify-end'>
-            <Button color='primary' onPress={() => handleOpen()} variant='solid' size='lg' startContent={<i class="ri-add-line text-2xl"></i>}>
-                order
+            <Button color='primary' onPress={() => handleOpen()} className='text-white' variant='solid' size='lg' startContent={<i class="ri-add-line text-2xl"></i>}>
+                Commander
             </Button>
             <Modal backdrop={"blur"} isOpen={isOpen} onClose={onClose} className='fixed inset-0 pb-[env(safe-area-inset-bottom)]'>
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1">Create Form</ModalHeader>
+                            <ModalHeader className="flex flex-col gap-1">Commander</ModalHeader>
                             <ModalBody className="flex flex-col items-start">
+                                <div className='w-full '>
+                                    <Chip color={pharmacy?.data?.delivary == "true" ? "success" : "danger"} className='text-white'  >
+                                        {pharmacy?.data?.delivary == "true" ? "livraison disponible" : "livraison indosponible"}
+                                    </Chip>
+                                </div>
                                 <div className='w-full h-full mb-4'>
                                     {/* <Input type="text" label="name" className='w-full mt-4' onChange={(e) => { setCredentials({ ...credentials, name:e.target.value }) }} required />
                                     <Input type="number" label="price" className='w-full mt-4' onChange={(e) => { setCredentials({ ...credentials, price: e.target.value }) }} required /> */}
@@ -81,11 +86,11 @@ const CreateCommand = ({ user, idPharmacy }) => {
                                     }
                                     <div className='w-full flex-1 items-end flex justify-end gap-4 mt-8 '>
                                         <Button color="danger" variant="light" onPress={onClose}>
-                                            Close
+                                            Ferme
                                         </Button>
-                                        <Button color="primary" onPress={toggleStatus} isLoading={postloader}>
+                                        <Button className='text-white' color="primary" onPress={toggleStatus} isLoading={postloader}>
                                             {/* <CircleTextToggle postloader={postloader} text={"Submit"} color={"default"} size={"sm"} /> */}
-                                            add
+                                            Ajouter
                                         </Button>
                                     </div>
 

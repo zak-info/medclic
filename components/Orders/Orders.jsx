@@ -11,15 +11,17 @@ const Orders = ({ commands }) => {
             </div>
 
             <div className='w-5/6 bg-secondry-1 rounded-lg flex mt-6'>
-                <button className='w-1/3 text-sm  rounded-lg py-3 bg-primary-1 text-white'>All</button>
-                <button className='w-1/3 text-sm  rounded-lg py-3 '>Open</button>
-                <button className='w-1/3 text-sm  rounded-lg py-3 '>Closed</button>
+                <button className='w-1/3 text-sm  rounded-lg py-3 bg-primary-1 text-white'>Tout</button>
+                <button className='w-1/3 text-sm  rounded-lg py-3 '>Ouvert</button>
+                <button className='w-1/3 text-sm  rounded-lg py-3 '>Ferme</button>
             </div>
-            {
-                commands?.map((ph, index) => (
-                    <Card key={index} data={ph} />
-                ))
-            }
+            <div className='w-full flex flex-col items-center mb-20'>
+                {
+                    commands?.map((ph, index) => (
+                        <Card key={index} data={ph} />
+                    ))
+                }
+            </div>
             {/* <Card data={{_id:"123123",date:"12-12-12",imageUrl:'/images/dwa.svg' , client:{fullname:"name 1",phone:'1234124',address:"alger"}}} /> */}
             {/* <Card data={{img:"p2.svg",name:"Dr. Marcus Horizon",job:"Psikeater"}} /> */}
 

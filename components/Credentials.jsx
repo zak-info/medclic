@@ -16,19 +16,19 @@ const Credentials = () => {
                     </svg>
                 </span>
                 <button className='w-full   text-secondry-3 flex justify-center'>
-                    <span className='w-4/5 text-sm font-bold justify-start'>Login with Google</span>
+                    <span className='w-4/5 text-sm font-bold justify-start'>Se connecter avec Google</span>
                 </button>
             </div>
             <div className="relative w-4/5 border rounded-full py-3 mt-2">
                 <i className="ri-apple-fill text-xl absolute inset-y-0 left-0 flex items-center pl-2"></i>
                 <button className='w-full   text-secondry-3 flex justify-center'>
-                    <span className='w-4/5 text-sm font-bold justify-start'>Login with Apple</span>
+                    <span className='w-4/5 text-sm font-bold justify-start'>Se connecter avec Apple</span>
                 </button>
             </div>
             <div className="relative w-4/5 border rounded-full py-3 mt-2">
                 <i class="ri-facebook-fill text-xl text-blue-500 absolute inset-y-0 left-0 flex items-center pl-2"></i>
                 <button className='w-full   text-secondry-3 flex justify-center'>
-                    <span className='w-4/5 text-sm font-bold justify-start'>Login with Facebook</span>
+                    <span className='w-4/5 text-sm font-bold justify-start'>Se connecter avec Facebook</span>
                 </button>
             </div>
         </>

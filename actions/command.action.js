@@ -144,6 +144,28 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
     return R * c;
 }
 
+
+
+
+export async function UpdateCommandDataKey(_id, data, path) {
+    try {
+        const result = await Command.updateOne({ _id }, data)
+        if (result?.success) {
+            revalidatePath("/dashboard/commands", "page")
+            if (path) {
+                revalidatePath(path, "page")
+            }
+            return { success: true, status: 200 };
+        } else {
+            return { success: false, status: 404 };
+        }
+    } catch (error) {
+        console.log(error);
+        return { success: false, status: 404, error }
+    }
+}
+
+
 function deg2rad(deg) {
     return deg * (Math.PI / 180);
 }

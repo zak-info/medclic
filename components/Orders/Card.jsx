@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 import ShowCommands from './ShowCommands';
+import { Chip } from '@nextui-org/react';
 
 const Card = ({ data }) => {
 
@@ -39,10 +40,27 @@ const Card = ({ data }) => {
                     <span className='w-1 h-1 bg-orange-400 rounded-full'></span>
                     <span className='text-xs ms-4'>{data?.status}</span>
                 </div>
+                {
+                    data?.data?.generic == "true" ?
+                        <div className='flex items-center '>
+                            <span className='w-1 h-1 bg-orange-400 rounded-full'></span>
+                            <span className='text-xs ms-4'>Generic</span>
+                        </div>
+                        :
+                        <div className='flex items-center '>
+                            <span className='w-1 h-1 bg-green-400 rounded-full'></span>
+                            <span className='text-xs ms-4'>Original</span>
+                        </div>
+                }
+                <div className='w-full '>
+                    <Chip color={data?.pharmacy?.data?.delivary == "true" ? "success" : "danger"} className='text-white'  >
+                        {data?.pharmacy?.data?.delivary == "true" ? "livraison disponible" : "livraison indosponible"}
+                    </Chip>
+                </div>
             </div>
             <div className='w-full flex justify-end mt-4'>
                 {/* <button className='w-2/5 py-2 bg-secondry-1 rounded-lg'>Cancel</button> */}
-                <button className='w-2/5 text-center py-2 bg-primary-1 text-white rounded-lg'>Discover</button>
+                <button className='w-2/5 text-center py-2 bg-primary-1 text-white rounded-lg'>Découvrir</button>
             </div>
 
 
