@@ -108,7 +108,7 @@ function GetMap({ userId, user , init_coordinates }) {
                         </Button>
                         <Button color="primary" onPress={Edit} className='' isLoading={postloader}>
                             {/* <CircleTextToggle postloader={postloader} text={"Submit"} color={"default"} size={"sm"} /> */}
-                            submit
+                            confirmer
                         </Button>
                     </div>
                     <div className=''>

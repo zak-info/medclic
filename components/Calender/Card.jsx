@@ -14,11 +14,11 @@ const Card = ({ data }) => {
     }
 
     return (
-        <div className=" w-5/6 flex border mt-4 rounded-lg overflow-clip ">
+        <div className=" w-5/6 h-60 flex border mt-4 rounded-lg overflow-clip ">
             <div className="h-full w-1/3 bg-blue-400 flex justify-center items-center">
-                <img src="/images/pharmacy.svg" className="w-40 h-40" />
+                <img src="/images/pharmacy.svg" className="w-40 h-60" />
             </div> 
-            <a href={"/dashboard/pharmacy/" + data?._id}  className='w-2/3   px-4 mt-6 py-3'>
+            <a href={"/dashboard/pharmacy/" + data?._id}  className='w-2/3   px-4 mt-2 py-3'>
                 <div className='w-full flex justify-between '>
                     <div className='flex flex-col'>
                         <span className='text-sm'>Ph. {data?.fullname}</span>
@@ -27,7 +27,7 @@ const Card = ({ data }) => {
                     {/* <Image src={"/images/"+data?.img} width={100} height={100} className='w-10 h-10' /> */}
                     {/* <div class="w-10 h-10 bg-[#329cde]  border border-white rounded-full flex justify-center items-center text-white" alt="">{getFirstLetters(data?.fullname)}</div> */}
                 </div>
-                <div className='w-full flex flex-col items-start mt-6'>
+                <div className='w-full flex flex-col items-start mt-2'>
                     {/* <svg width="13" height="15" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.932861 5.87778H12.0728" stroke="#555555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /><path d="M9.27635 8.31846H9.28214" stroke="#555555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /><path d="M6.50291 8.31846H6.5087" stroke="#555555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /><path d="M3.72362 8.31846H3.72941" stroke="#555555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /><path d="M9.27635 10.7477H9.28214" stroke="#555555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /><path d="M6.50291 10.7477H6.5087" stroke="#555555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /><path d="M3.72362 10.7477H3.72941" stroke="#555555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /><path d="M9.02729 1.25V3.30674" stroke="#555555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /><path d="M3.97847 1.25V3.30674" stroke="#555555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /><path fill-rule="evenodd" clip-rule="evenodd" d="M9.14892 2.23706H3.85685C2.02142 2.23706 0.875 3.25952 0.875 5.13895V10.795C0.875 12.704 2.02142 13.7501 3.85685 13.7501H9.14313C10.9843 13.7501 12.125 12.7217 12.125 10.8423V5.13895C12.1308 3.25952 10.9901 2.23706 9.14892 2.23706Z" stroke="#555555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg> */}
                     <div className="flex gap-2 items-center">
                         <i class="ri-map-pin-line text-primary-1"></i>
@@ -45,7 +45,6 @@ const Card = ({ data }) => {
                     </div>
                 </div>
                 <div className='w-full flex justify-evenly mt-4'>
-                    {/* <a href={"/dashboard/pharmacy/" + data?._id} className='w-2/5 text-center py-2 bg-secondry-1 rounded-lg'>Commande</a> */}
                     <a href={"/dashboard/pharmacy/" + data?._id} className='w-2/5 text-center py-2 bg-primary-1 text-white rounded-lg'>Visiter</a>
                 </div>
             </a>

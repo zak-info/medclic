@@ -4,7 +4,6 @@
 
 export async function uploadImageToNodejs(formData, url) {
     try {
-
         // const formData = new FormData();
         // formData.append('image', imageFile);
 

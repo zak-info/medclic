@@ -1,8 +1,14 @@
-import Image from 'next/image'
+"use client"
+
+
 import React from 'react'
 import Card from './Card'
+import { useSearchParams } from 'next/navigation';
 
 const Calender = ({ pharmacies }) => {
+    const searchParams = useSearchParams();
+
+    const name = searchParams.get('name');
     return (
         <div className='w-screen h-screen pt-8 pb-24  flex flex-col items-center'>
             <div className='w-full flex justify-between px-8'>
@@ -16,9 +22,12 @@ const Calender = ({ pharmacies }) => {
                 <button className='w-1/3 text-sm  rounded-lg py-3 '>Fermé</button>
             </div> */}
             {
-                pharmacies?.map((ph, index) => (
-                    <Card key={index} data={ph} />
-                ))
+                pharmacies?.length > 0 ?
+                    pharmacies?.filter(i => i?.address?.includes(name))?.map((ph, index) => (
+                        <Card key={index} data={ph} />
+                    ))
+                    :
+                    null
             }
             {/* <Card data={{img:"p2.svg",name:"Dr. Marcus Horizon",job:"Psikeater"}} /> */}
 

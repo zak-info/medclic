@@ -20,7 +20,7 @@ const AutoGeneric = ({user, status }) => {
     }
     return (
         <div className="w-full px-4 mt-6 ">
-            <h1 className=" font-bold">confirmer les generiques </h1>
+            <h1 className=" font-bold">disponible en  generiques </h1>
             <div className=' flex mt-2  items-center gap-2'>
                 <label className="relative inline-flex items-center cursor-pointer">
                     <input

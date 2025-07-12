@@ -20,3 +20,18 @@ export async function addExchange(data) {
     }
 }
 
+
+export async function deleteMongoExchange(_id) {
+    try {
+        await connect()
+        const result = await Exchange.findByIdAndDelete(_id)
+        console.log("result :", result);
+        revalidatePath("/dashboard/exchange")
+        revalidatePath("/dashboard/exchange/mine")
+        return { success: true, status: 200 };
+    } catch (error) {
+        console.log(error);
+        return { success: false, status: 404, error }
+    }
+}
+

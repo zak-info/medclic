@@ -10,7 +10,7 @@ const page = async ({ params }) => {
   const session = await getServerSession(authOptions);
   await connect()
   const user = await User.findOne({ _id: params?._id })
-  const products = await Product.find({ idPharmacy: user?._id })
+  const products = await Product.find({ idPharmacy: params?._id })
   const myProducts = await Product.find({ idPharmacy: session?.user?._id })
 
   return (

@@ -8,14 +8,16 @@ import React from 'react'
 const page = async() => {
   const session = await getServerSession(authOptions);
   await connect()
-  const exchanges = await Exchange.find({idPharmacy:session?.user?._id}) 
-  .populate('idPharmacy') // Populate pharmacy details (only 'name' field)
-  .populate('idUser') // Populate user details (only 'username' field)
-  .populate('toOffer') // Populate the products in `toOffer`
-  .populate('toGet'); // Populate the products in `toGet`
+  const exchanges = await Exchange.find({}) 
+  .populate('idUser')
+  .populate('idPharmacy') 
+  .populate('toOffer') 
+  .populate('toGet')
+
+  console.log("exchanges : ",exchanges);
 
   return (
-    <ExchangeCom exchanges={exchanges} />
+    <ExchangeCom exchanges={JSON.stringify(exchanges)} />
   )
 }
 

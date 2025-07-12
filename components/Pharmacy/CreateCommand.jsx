@@ -6,41 +6,23 @@ import { Button, Chip, Input, Modal, ModalBody, ModalContent, ModalHeader, Texta
 import React, { useState } from 'react'
 import Lottie from "lottie-react";
 import check from "@/public/check.json";
+import { addPanier } from '@/actions/panier.action';
 
-const CreateCommand = ({ user, idPharmacy,pharmacy }) => {
+const CreateCommand = ({selected , setSelected, products, user, idPharmacy, pharmacy }) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
     const handleOpen = () => {
         onOpen();
     }
     const [postloader, setPostloader] = useState(false);
-    const [credentials, setCredentials] = useState(null);
+    const [credentials, setCredentials] = useState({products:selected});
     const [event, setEvent] = useState(false);
-    const [imageFile, setImageFile] = useState(null);
-    const [imagePreview, setImagePreview] = useState(null);
-    const handleImageChange = async (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const fileUrl = URL.createObjectURL(file);
-            setImageFile(file);
-            setImagePreview(fileUrl);
-            // const blurData = await getBase64(fileUrl);
-            // setImagePreviewDataBlur(blurData);
-        }
-    };
 
 
     const toggleStatus = async () => {
         setPostloader(true);
-        const form = new FormData();
-        // form.append('name', credentials.name);
-        form.append('description', credentials.description);
-        // form.append('price', credentials.price);
-        form.append('idPharmacy', idPharmacy);
-        form.append('idUser', user?._id);
-        form.append('image', imageFile);
         try {
-            const result = await CreateCom(form);
+            const result = await addPanier({...credentials,idUser:user?._id, idPharmacy});
             if (result.success) {
                 // onClose();
                 setEvent(true)
@@ -56,8 +38,8 @@ const CreateCommand = ({ user, idPharmacy,pharmacy }) => {
 
     return (
         <div className='w-full flex justify-end'>
-            <Button color='primary' onPress={() => handleOpen()} className='text-white' variant='solid' size='lg' startContent={<i class="ri-add-line text-2xl"></i>}>
-                Commander
+            <Button color='primary' onPress={() => handleOpen()} className='text-white' variant='solid' size='lg' startContent={<i class="ri-shopping-basket-line text-2xl"></i>}>
+                Panier {credentials?.products?.length > 0 ? credentials?.products?.length: null}
             </Button>
             <Modal backdrop={"blur"} isOpen={isOpen} onClose={onClose} className='fixed inset-0 pb-[env(safe-area-inset-bottom)]'>
                 <ModalContent>
@@ -80,8 +62,25 @@ const CreateCommand = ({ user, idPharmacy,pharmacy }) => {
                                             </div>
                                             :
                                             <>
+                                                <select className=' w-full h-10 mt-4 ' name="products" id="" onChange={(e) => { setCredentials({ ...credentials, products: [e.target.value, ...(credentials?.products?.length > 0 ? credentials?.products : [])] }) }} >
+                                                    <option value="">select les produits</option>
+                                                    {
+                                                        products?.filter(item => !credentials?.products?.includes(item?._id))?.map((p, index) => (
+                                                            <option key={index} value={p._id}> {p?.name} </option>
+                                                        ))
+                                                    }
+                                                </select>
+                                                <div className='w-full flex flex-wrap gap-4 mt-4'>
+                                                    {
+                                                        credentials?.products?.map((p, index) => (
+                                                            <Chip color='success' variant='flat' onClick={()=>{setSelected(prev => prev.filter(i => i != p)),setCredentials({...credentials,products:credentials?.products?.filter(i => i != p)})}}    >
+                                                                {products?.find(i => i._id == p)?.name}
+                                                            </Chip>
+                                                        ))
+                                                    }
+
+                                                </div>
                                                 <Textarea type="text" label="description" className='w-full mt-4' onChange={(e) => { setCredentials({ ...credentials, description: e.target.value }) }} required />
-                                                <input type="file" name="image" onChange={handleImageChange} id="" placeholder='product image' className='mt-6' />
                                             </>
                                     }
                                     <div className='w-full flex-1 items-end flex justify-end gap-4 mt-8 '>
@@ -89,7 +88,6 @@ const CreateCommand = ({ user, idPharmacy,pharmacy }) => {
                                             Ferme
                                         </Button>
                                         <Button className='text-white' color="primary" onPress={toggleStatus} isLoading={postloader}>
-                                            {/* <CircleTextToggle postloader={postloader} text={"Submit"} color={"default"} size={"sm"} /> */}
                                             Ajouter
                                         </Button>
                                     </div>

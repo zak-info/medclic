@@ -21,25 +21,26 @@ const page = async () => {
     matchQuery.idUser = new mongoose.Types.ObjectId(session.user._id);
   }
 
-  const commands = await Command.aggregate([
-    { $match: matchQuery },
-    {
-      $lookup: {
-        from: "users",
-        localField: "idUser",
-        foreignField: "_id",
-        as: "user",
-      },
-    },
-    {
-      $unwind: { path: "$user", preserveNullAndEmptyArrays: true },
-    },
-  ]);
+  // const commands = await Command.aggregate([
+  //   { $match: matchQuery },
+  //   {
+  //     $lookup: {
+  //       from: "users",
+  //       localField: "idUser",
+  //       foreignField: "_id",
+  //       as: "user",
+  //     },
+  //   },
+  //   {
+  //     $unwind: { path: "$user", preserveNullAndEmptyArrays: true },
+  //   },
+  // ]);
 
+  const commands = await Command.find({idUser:session?.user?._id}).populate("idPharmacy")
   console.log("commands : commands : ", commands);
 
   return (
-    <FreeCom commands={commands} currentUser={session?.user} />
+    <FreeCom commands={JSON.stringify(commands)} currentUser={session?.user} />
   )
 }
 

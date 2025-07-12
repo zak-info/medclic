@@ -1,9 +1,11 @@
 "use client"
 
+import { updateMongoCommand } from '@/actions/command.action';
 import { CreateMedic, createProduct } from '@/actions/product.action';
 import { Button, Input, Modal, ModalBody, ModalContent, ModalHeader, Textarea, useDisclosure } from '@nextui-org/react';
 import Image from 'next/image';
 import React, { useState } from 'react'
+import toast from 'react-hot-toast';
 
 const ShowCommands = ({ data }) => {
 
@@ -12,26 +14,43 @@ const ShowCommands = ({ data }) => {
         onOpen();
     }
 
+    const [postloader, setPostLoader ] = useState(false)
+
+    const refuseOffer = async () => {
+        setPostLoader(true)
+        try{
+            const res = await updateMongoCommand({_id:data?._id},{idPharmacy:null,"data.resStatus":"non","data.resDes":'',"data.idPharmacy":""})
+            if(res?.success){
+                onClose()
+                toast.success("terminer ✅")
+            }
+            setPostLoader(false)   
+        }catch(e){
+            setPostLoader(false)   
+        }
+        setPostLoader(false)
+
+    }
+
 
 
     return (
-        <div className='w-full flex  justify-center'>
-            {/* <Button color='primary' onPress={() => handleOpen()} variant='flat' size='lg' startContent={<i class="ri-file-list-3-fill text-2xl"></i>}>
-                Create Medication
-            </Button> */}
-            <Image onClick={() => handleOpen()} src={data?.imageUrl} width={100} height={100} className=' absolute rounded-lg top-0 right-0 m-4 w-32 h-32' />
-
+        <>
+            <Image onClick={() => handleOpen()} src={data?.imageUrl} width={100} height={100} className='  rounded-lg   m-4 w-32 h-full' />
             <Modal backdrop={"blur"} isOpen={isOpen} onClose={onClose} className='fixed inset-0 pb-[env(safe-area-inset-bottom)]'>
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1">Create Table</ModalHeader>
+                            <ModalHeader className="flex flex-col gap-1">page</ModalHeader>
                             <ModalBody className="flex flex-col items-center">
                                 <div className='w-full h-full flex flex-col items-center  mb-4'>
                                     <Image onClick={() => handleOpen()} src={data?.imageUrl} width={100} height={100} className='  w-3/4 h-5/6' />
+                                    <div className='w-full flex justify-start mt-6'>
+                                       <span className='  font-bold'>Description</span> : <p> {data?.data?.resDes}</p>
+                                    </div>
                                     <div className='w-full flex-1 items-end flex justify-end gap-4 mt-8 '>
-                                        <Button color="danger" variant="light" onPress={onClose}>
-                                            Close
+                                        <Button color="danger" isLoading={postloader} variant="flat" onPress={refuseOffer}>
+                                            refuser
                                         </Button>
                                     </div>
 
@@ -41,8 +60,7 @@ const ShowCommands = ({ data }) => {
                     )}
                 </ModalContent>
             </Modal>
-
-        </div>
+        </>
     )
 }
 

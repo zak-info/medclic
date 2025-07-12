@@ -12,39 +12,98 @@ import mongoose from "mongoose";
 
 export const CreateCom = async (formData) => {
     if (!formData) {
-        return { success: false, status: 400, msg: "Validation error. Check the provided data.", };
+        return {
+            success: false,
+            status: 400,
+            msg: "Validation error. Check the provided data.",
+        };
     }
+
     try {
-        // const name = formData.get('name');
+        await connect()
         const description = formData.get('description');
-        // const price = formData.get('price');
+        const medName = formData.get('medName');
         const idPharmacy = formData.get('idPharmacy');
         const idUser = formData.get('idUser');
+        const imageFile = formData.get('image'); // assuming input name="image"
 
         if (!idUser) {
-            throw new Error('Name is required.');
+            throw new Error('User ID is required.');
         }
 
-        // const url = await AddImageToPinata(formData, 2592000)
-        const { imageUrl, base64Placeholder } = await uploadImageToNodejs(formData, "/medications")
-        const result = await Command.create({description, idUser, idPharmacy, imageUrl, base64Placeholder, status: "pending" });
-        revalidatePath("/dashboard/commands")
+        let imageUrl = null;
+        let base64Placeholder = null;
 
-        return { success: true, status: 201, result, msg: "Command created successfully!", };
+        // Only upload if an image is provided
+        if (imageFile && typeof imageFile === 'object' && imageFile.size > 0) {
+            const uploadResult = await uploadImageToNodejs(formData, "/medications");
+            imageUrl = uploadResult.imageUrl;
+            base64Placeholder = uploadResult.base64Placeholder;
+        }
+
+        const result = await Command.create({
+            description,
+            idUser,
+            idPharmacy,
+            imageUrl,
+            base64Placeholder,
+            status: "pending",
+            data: { medName },
+        });
+
+        revalidatePath("/dashboard/commands");
+
+        return {
+            success: true,
+            status: 201,
+            result,
+            msg: "Command created successfully!",
+        };
+
     } catch (error) {
         console.error("Error creating Command:", error);
         if (error.code === 11000) {
-            return { success: false, status: 409, msg: "Command with this name already exists!", error: error.message, };
+            return {
+                success: false,
+                status: 409,
+                msg: "Command with this name already exists!",
+                error: error.message,
+            };
         }
         if (error.name === "ValidationError") {
-            return { success: false, status: 400, msg: "Validation error. Check the provided data.", error: error.message, };
+            return {
+                success: false,
+                status: 400,
+                msg: "Validation error. Check the provided data.",
+                error: error.message,
+            };
         }
         return {
-            success: false, status: 500, msg: "Server error. Please try again later.", error: error.message,
+            success: false,
+            status: 500,
+            msg: "Server error. Please try again later.",
+            error: error.message,
         };
     }
 };
 
+
+
+
+export async function updateMongoCommand(condition,data) {
+    try {
+        await connect()
+        console.log("data : data :", data);
+        const result = await Command.updateOne(condition, {$set:data})
+        revalidatePath("/dashboard/commands")
+        revalidatePath("/dashboard/freecom")
+        return { success: true, status: 200};
+
+    } catch (error) {
+        console.log(error);
+        return { success: false, status: 404, error }
+    }
+}
 
 export const RefuseCom = async (idCommand, idPharmacy) => {
     if (!idCommand || !idPharmacy) {

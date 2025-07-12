@@ -3,7 +3,7 @@ import React from 'react'
 import ShowCommands from './ShowCommands';
 import CancleCommand from './CancleCommand';
 
-const Card = ({ data }) => {
+const Card = ({ data,user }) => {
 
     console.log("  data : ", data);
     function getFirstLetters(sentence) {
@@ -20,33 +20,28 @@ const Card = ({ data }) => {
         <div className=' relative w-5/6 border rounded-lg px-4 mt-6 py-3'>
             <div className='w-full flex justify-between '>
                 <div className='flex flex-col'>
-                    <span className='text-lg'>Mr/Mme. {data?.user?.fullname}</span>
-                    <span className='text-xs text-gray-400'>{new Date(data?.createdAt).toLocaleDateString()}</span>
-                    <p className=" font-bold mt-6"> {data?.imageUrl ? "Ordenance":"Médicament"}</p>
-                </div>
-                <div>
+                    <span className='text-lg font-bold '>Mr/Mme. {data?.user?.fullname}</span>
                     <p className="text-sm">{data?.user?.phone}</p>
+                    <span className='text-xs mt-4 text-gray-400'>{new Date(data?.createdAt).toLocaleDateString()}</span>
+                    <p className=" font-bold mt-6"> {data?.data?.medName ? "Médicament" : "Ordonnance"}</p>
                 </div>
+                {/* {
+                    data?.data?.medName ?
+                        <>
+
+                        </>
+                        :
+                        <> */}
+                            <div className='w-full flex gap-4 items-center justify-end '>
+                                <ShowCommands user={user} data={data} />
+                                {/* <CancleCommand idCommand={data?._id} idPharmacy={data?.idPharmacy} /> */}
+                            </div>
+                        {/* </>
+                } */}
+
             </div>
 
-            {/* <div className='w-full flex flex-col gap-2  mt-6'>
-                <div className='flex items-center '>
-                    <i class="ri-map-pin-line text-primary-1"></i>
-                    <span className='text-xs ms-1'>{data?.user?.address}</span>
-                </div>
-                <div className='flex items-center'>
-                    <a href={"tel:" + data?.client?.phone}><i class="ri-phone-line  text-primary-1"></i></a>
-                    <span className='text-xs ms-1'>{data?.user?.phone}</span>
-                </div>
-                <div className='flex items-center '>
-                    <span className='w-1 h-1 bg-orange-400 rounded-full'></span>
-                    <span className='text-xs ms-4'>pending</span>
-                </div>
-            </div> */}
-            <div className='w-full flex gap-4 justify-end  mt-4'>
-                <ShowCommands data={data} />
-                <CancleCommand idCommand={data?._id} idPharmacy={data?.idPharmacy} />
-            </div>
+
 
 
         </div>

@@ -9,7 +9,7 @@ const page = async () => {
 
   const session = await getServerSession(authOptions);
   console.log("the sess",session);
-  if (session) redirect("/home");
+  if (session) redirect( session?.user?.type == "user" ? "/home2" : "/home");
 
   return (
     <Login />

@@ -22,7 +22,6 @@ const schama = new Schema(
         },
         description:{
             type: String,
-            unique: true,
         },
         type: {
             type: String,
